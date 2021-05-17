@@ -1,0 +1,27 @@
+﻿@model WebApplication2.Models.Novost
+
+@{
+    ViewBag.Title = "Delete";
+}
+<style>
+    a:link {color: black;text-decoration: none}
+    a:visited {color: black;text-decoration: none}
+    a:hover {color: black;text-decoration: none}
+    a:active {color: black;text-decoration: none}
+    a {text-decoration: none;}
+    span {font-weight: bold;text-decoration: underline;}
+</style>
+
+<h3 style="position:relative;left:2px">Дали сте сигурни дека сакате да ја избришите новоста <span>@Html.DisplayFor(model => model.Naslov)</span> од листата?</h3>
+<br />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color" style="text-align:center">
+        <input type="submit" value="Избриши" class="btn btn-default" />
+        <div class="btn btn-default">@Html.ActionLink("Не бриши", "Index")</div>
+    </div>
+}
+</div>

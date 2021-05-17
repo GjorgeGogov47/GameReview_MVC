@@ -1,0 +1,114 @@
+﻿@model IEnumerable<WebApplication2.Models.Novost>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@Scripts.Render("~/Scripts/jquery-3.3.1.js")
+
+<style>
+    a:link {color: darkred;text-decoration: none}
+    a:visited {color: darkred;text-decoration: none}
+    a:hover {color: darkred;text-decoration: none}
+    a:active {color: darkred;text-decoration: none}
+    a {text-decoration: none;}
+    img:hover {opacity: 0.7;}
+
+    #scroll {
+        position: fixed;
+        right: 10px;
+        bottom: 10px;
+        cursor: pointer;
+        width: 50px;
+        height: 50px;
+        background-color: red;
+        text-indent: -9999px;
+        display: none;
+        -webkit-border-radius: 60px;
+        -moz-border-radius: 60px;
+        border-radius: 60px
+    }
+
+        #scroll span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -8px;
+            margin-top: -12px;
+            height: 0;
+            width: 0;
+            border: 8px solid transparent;
+            border-bottom-color: #ffffff;
+        }
+
+        #scroll:hover {
+            background-color: orange;
+            opacity: 1;
+            filter: "alpha(opacity=100)";
+            -ms-filter: "alpha(opacity=100)";
+        }
+        .rec {
+            display: block;
+            height: 100%;
+            width: 100%;
+            text-decoration: none;
+    }
+
+</style>
+@if (User.Identity.IsAuthenticated)
+{
+<p class="btn btn-default" style="font-size:20px;background: linear-gradient(lightgreen,lawngreen);">
+    @Html.ActionLink("Додади Новост", "Create")
+</p>
+}
+<br />
+
+<div style="display:inline-block;width:1000px;height:5px;background-color:black"></div>
+
+@foreach (var item in Model.Reverse())
+{
+    if (User.Identity.IsAuthenticated)
+    {
+    <div style="position:absolute;left:1113px">
+        <p class="btn btn-default" style="font-size:20px;background: linear-gradient(lightgreen,lawngreen);width:110px">
+            @Html.ActionLink("Уреди", "Edit", new { id = item.Id })
+        </p><br />
+        <p class="btn btn-default" style="font-size:20px;background: linear-gradient(lightgreen,lawngreen);width:110px">
+            @Html.ActionLink("Избриши", "Delete", new { id = item.Id })
+        </p>
+    </div>
+    }
+
+    <div id="big" class="bigg" style="position:absolute;width:1000px;height:139px">@Html.ActionLink(" ", "Details", new { id = item.Id }, new { @class = "rec" })</div>
+    <img src="@item.Slika" style="display:inline-block;max-width:230px;max-height:130px;" alt="Не внесовте слика">
+    
+    <div style="display:inline-block;">
+        <p id="nem" class="nemm" style="font-weight:bold;font-size:16px;width:700px">@Html.DisplayFor(modelItem => item.Naslov)</p>
+        <p style="width:650px">@Html.DisplayFor(modelItem => item.Kratko)</p>
+    </div>
+    <br />
+    <div style="display:inline-block;width:1000px;height:5px;background-color:black"></div>
+    <br />
+}
+
+
+
+
+<a href="#" id="scroll" style="display: none;"><span></span></a>
+
+<script>
+
+    $(document).ready(function () {
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 100) {
+                $('#scroll').fadeIn();
+            } else {
+                $('#scroll').fadeOut();
+            }
+        });
+        $('#scroll').click(function () {
+            $("html, body").animate({ scrollTop: 0 }, 600);
+            return false;
+        });
+    });
+</script>

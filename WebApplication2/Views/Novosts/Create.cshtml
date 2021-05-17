@@ -1,0 +1,72 @@
+﻿@model WebApplication2.Models.Novost
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<style>
+    textarea {
+        width: 300px;
+        height: 150px;
+    }
+
+    .pero {
+        margin-left: 5px
+    }
+</style>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h3>Додади новост</h3>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label class="control-label col-md-2">Слика</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Slika, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Slika, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Наслов</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Naslov, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Naslov, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Краток опис</label>
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Kratko, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Kratko, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Текст</label>
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Storija, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Storija, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Додади новост" class="btn btn-default" />
+            </div>
+        </div>
+
+        <div class="col-md-offset-2">
+            @Html.ActionLink("Не додавај", "Index", new object { }, new { @class = "btn btn-default pero" })
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

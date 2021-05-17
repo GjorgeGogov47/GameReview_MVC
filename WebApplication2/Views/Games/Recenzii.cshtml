@@ -1,0 +1,146 @@
+﻿@model WebApplication2.Models.Game
+
+@{
+    ViewBag.Title = "Recenzii";
+}
+<style>
+    #scroll {
+        position: fixed;
+        right: 10px;
+        bottom: 10px;
+        cursor: pointer;
+        width: 50px;
+        height: 50px;
+        background-color: red;
+        text-indent: -9999px;
+        display: none;
+        -webkit-border-radius: 60px;
+        -moz-border-radius: 60px;
+        border-radius: 60px
+    }
+        #scroll span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -8px;
+            margin-top: -12px;
+            height: 0;
+            width: 0;
+            border: 8px solid transparent;
+            border-bottom-color: #ffffff;
+        }
+
+        #scroll:hover {
+            background-color: orange;
+            opacity: 1;
+            filter: "alpha(opacity=100)";
+            -ms-filter: "alpha(opacity=100)";
+        }
+</style>
+
+@Scripts.Render("~/Scripts/jquery-3.3.1.js")
+<head><link rel="stylesheet" href="~/CSS/circle.css"></head>
+
+<img src="@Model.Poster" style="width:100%;height:450px;filter:brightness(45%)" alt="Не Внесовте Слика" /><br />
+
+<div style="position:absolute;text-align:center;bottom:120px;width:6%;margin:0 auto;left:635px">
+    <p style="border-top:3px solid orangered;color:white;font-size:13px;font-weight:bold">
+        РЕЦЕНЗИЈА
+    </p><br />
+</div>
+    <p style="font-size:30px;color:white;font-weight:bold;text-align:center;position:relative;bottom:80px;">
+        @Html.DisplayFor(model => model.Ime)
+    </p>
+
+
+    <p style="white-space:pre-line;width:100%;font-size:18px;color:black">
+        @Html.DisplayFor(model => model.Recenz)
+    </p><br />
+
+<img src="@Model.GameplaySlika" style="width:100%" alt="Не Внесовте Слика" /><br />
+
+<br />
+
+<h3 style="text-align:center">Оценка</h3>
+
+<div id="kug" style="position:relative;left:450px" class="c100 p10 bar big orange">
+    <span id="krug" style="color:red;">@Html.DisplayFor(model => model.Ocena)</span>
+    <div class="slice">
+        <div class="bar"></div>
+        <div class="fill"></div>
+    </div>
+</div>
+
+<a href="#" id="scroll" style="display: none;"><span></span></a>
+
+<script>
+    $(document).ready(function () {
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 100) {
+                $('#scroll').fadeIn();
+            } else {
+                $('#scroll').fadeOut();
+            }
+        });
+        $('#scroll').click(function () {
+            $("html, body").animate({ scrollTop: 0 }, 600);
+            return false;
+        });
+    });
+
+
+    $(function () {
+        var x = document.getElementById("krug");
+        var y = document.getElementById("kug");
+
+        if (x.innerHTML == 1) {
+            x.style.color = "black";
+        }
+        if (x.innerHTML == 2) {
+            y.classList.remove("p10");
+            y.classList.add("p20");
+            x.style.color = "red";
+        }
+        if (x.innerHTML == 3) {
+            y.classList.remove("p10");
+            y.classList.add("p30");
+            x.style.color = "red";
+        }
+        if (x.innerHTML == 4) {
+            y.classList.remove("p10");
+            y.classList.add("p40");
+            x.style.color = "red";
+        }
+        if (x.innerHTML == 5) {
+            y.classList.remove("p10");
+            y.classList.add("p50");
+            x.style.color = "yellowgreen";
+        }
+        if (x.innerHTML == 6) {
+            y.classList.remove("p10");
+            y.classList.add("p60");
+            x.style.color = "green";
+        }
+        if (x.innerHTML == 7) {
+            y.classList.remove("p10");
+            y.classList.add("p70");
+            x.style.color = "green";
+        }
+        if (x.innerHTML == 8) {
+            y.classList.remove("p10");
+            y.classList.add("p80");
+            x.style.color = "green";
+        }
+        if (x.innerHTML == 9) {
+            y.classList.remove("p10");
+            y.classList.add("p90");
+            x.style.color = "green";
+        }
+        if (x.innerHTML == 10) {
+            y.classList.remove("p10");
+            y.classList.add("p100");
+            x.style.color = "#FFD700";
+        }
+    });
+    
+</script>
